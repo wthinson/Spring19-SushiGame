@@ -1,0 +1,88 @@
+package a1;
+
+import java.util.Scanner;
+
+public class A1Jedi {
+
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		
+		int numberOfItems = scan.nextInt();
+		String[] itemsList = new String[numberOfItems];
+		int itemCount = 0; 
+		int customerCount = 0;
+		String nameOfItem = new String();
+		String nameOfBoughtItem = new String();
+		int[] quantityOfItem = new int[numberOfItems];
+		int numberOfItemsBought = 0;
+		
+		for (int i = 0; i < numberOfItems; i++) {
+			// running through the grocery list and prices of items
+			nameOfItem = scan.next();
+			double priceOfItem = scan.nextDouble();
+			itemsList[i] = nameOfItem;
+		}
+		
+		int numberOfCustomers = scan.nextInt();
+		int[] customerCountArray = new int[numberOfItems];
+		
+		// this for loop runs through the customers and records their names
+    
+		for (int j = 0; j < numberOfCustomers; j++) {
+			String firstNameOfCustomer = scan.next();
+			String lastNameOfCustomer = scan.next();
+			String customerName = firstNameOfCustomer + lastNameOfCustomer;
+			numberOfItemsBought = scan.nextInt();
+			String[] itemsBoughtList = new String[numberOfItemsBought];
+			boolean[] hasBeenBought = new boolean[numberOfItems]; 
+
+			for (int z = 0; z < numberOfItemsBought; z++) {
+				// this for loop runs through all of the items bought by the customer and records the quantity
+				// and name of the item
+				// it also starts the item count from 0 and the customer count from 0
+        
+				int numberOfBoughtItem = scan.nextInt();
+				itemCount = numberOfBoughtItem;
+				nameOfBoughtItem = scan.next();
+				itemsBoughtList[z] = nameOfBoughtItem;
+					
+				for (int w = 0; w < numberOfItems; w++) {
+					if (itemsBoughtList[z].equals(itemsList[w])) {
+						// if the name of the bought item is one of the items on the menu,
+						// then I will add a customer and I will add to the item count as well.
+						itemCount = numberOfBoughtItem;
+						quantityOfItem[w] += itemCount;
+						if (hasBeenBought[w] == false) {
+							customerCountArray[w]++;
+							hasBeenBought[w] = true;
+						}
+						else {
+							customerCountArray[w] = customerCountArray[w];
+
+						}
+
+							
+						}
+
+					}
+				
+				}
+			
+			
+		}
+		
+		for (int k = 0; k < numberOfItems; k++)	{
+			if (quantityOfItem[k] == 0) {
+				System.out.println("No customers bought " + itemsList[k]);
+
+			} else {
+				System.out.println(customerCountArray[k] + " customers bought " + quantityOfItem[k] + " " + itemsList[k]);
+			}
+					// use the quantity array to compare it to the items array and compare it to each other 
+					// once you do that, you can print the quantity[i] and the itemsList[i] 
+
+		}
+	
+	}
+	
+}
